@@ -18,7 +18,7 @@ class Point:
             return self if other else other
         a, b, p = self.curve
         if self.x == other.x and self.y != other.y:
-            return Point(None, None, self.curve)  # Point at infinity
+            return Point(None, None, self.curve)
         if self.x == other.x:
             m = ((3 * pow(self.x, 2) + a) * pow(2 * self.y, -1, p)) % p
         else:
@@ -28,7 +28,6 @@ class Point:
         return Point(x3, y3, self.curve)
     
     def __rmul__(self, k):
-        # Scalar multiplication using double-and-add
         Q = Point(self.x, self.y, self.curve)
         k_bin = bin(k)[2:]
         for bit in k_bin[1:]:

@@ -1,10 +1,11 @@
 from point import Point
 from ecc_operations import find_base_point, find_n, generate_curve, generate_keys, sign, verify, generate_prime
+import flask
 
 def app():
     print("Digital Signature App using ECC")
     # p = 907
-    p = generate_prime(30)
+    p = generate_prime(13)
     a, b = 1, 7
     # # # a, b = generate_curve(p)
     # p = 2701167613195130481826167156931545231582958730085772462601916414099154162919296538782370335616437698077798489651621592967846000281906070203543131

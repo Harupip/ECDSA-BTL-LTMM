@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+/* button {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+} */
+div {
+    margin: 10px 0;
+}
+
+.font-bold {
+    font-weight: bold;
+}

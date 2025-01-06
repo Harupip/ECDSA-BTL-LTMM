@@ -3,6 +3,7 @@ import time
 from point import Point
 import gmpy2
 import hashlib
+import math
 
 def generate_prime(bits=480):
     while True:
@@ -24,8 +25,6 @@ def generate_curve(p, max_attempts=1000, seed=None):
     raise ValueError(f"Unable to generate a valid curve after {max_attempts} attempts.")
 
 def find_base_point(a, b, p):
-    # This is a simplified version; in practice, finding the order is non-trivial.
-    # For demonstration, we'll select a random point and assume it's a generator.
     while True:
         x = random.randint(0, p - 1)
         y_sq = (pow(x, 3, p) + a * x + b) % p
@@ -33,8 +32,6 @@ def find_base_point(a, b, p):
             y = pow(y_sq, (p + 1) // 4, p)
             if pow(y, 2, p) == y_sq:
                 G = Point(x, y, (a, b, p))
-                # Compute the order using Pollard's Rho algorithm (not implemented here)
-                # For simplicity, assume the order is prime
                 return G
         except ValueError:
             continue
@@ -75,7 +72,7 @@ def sign(m, d, G, n):
         if r == 0:
             continue
         s = ((H + d * r) * k_inv) % n
-        if s == 0:
+        if s == 0 or math.gcd(s, n) != 1:
             continue
         return (r, s)
 
