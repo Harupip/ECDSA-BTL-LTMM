@@ -21,6 +21,8 @@ async function signMessage() {
     console.log(data)
     document.getElementById('signature').innerHTML = `
         <p class="text-break"><span class="font-bold">Signature:</span> (r=${data.r}, s=${data.s})</p>
+        <input type="text" id="inputR" class="form-control d-none" value="${data.r}">
+        <input type="text" id="inputS" class="form-control d-none" value="${data.s}">
     `;
 }
 
@@ -46,11 +48,24 @@ async function verifySignature() {
     });
     const data = await response.json();
     document.getElementById('verification-result').innerHTML = `
-        <p>Verification Result: ${data.valid ? "Valid" : "Invalid"}</p>
+        <div class="p-3 rounded text-center ${data.valid ? 'bg-success text-white' : 'bg-danger text-white'}">
+            <p class="mb-0 fw-bold">Verification Result: ${data.valid ? "Valid" : "Invalid"}</p>
+        </div>
     `;
 }
 
 document.getElementById("useGeneratedKey").addEventListener("change", function () {
     const customKeyInputs = document.getElementById("customKeyInputs");
     customKeyInputs.style.display = this.checked ? "none" : "block";
+});
+
+document.getElementById("useGeneratedSign").addEventListener("change", function () {
+    const ir = document.getElementById('inputR').value;
+    const is = document.getElementById('inputS').value;
+    const r = document.getElementById('r');
+    const s = document.getElementById('s');
+    if (ir && is && this.checked) {
+        r.value = ir;
+        s.value = is;
+    }
 });
