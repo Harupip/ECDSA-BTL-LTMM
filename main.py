@@ -5,18 +5,25 @@ import flask
 def app():
     print("Digital Signature App using ECC")
     # p = 907
-    p = generate_prime(13)
+    p = generate_prime(30)
     a, b = 1, 7
     # # # a, b = generate_curve(p)
     # p = 2701167613195130481826167156931545231582958730085772462601916414099154162919296538782370335616437698077798489651621592967846000281906070203543131
     G = find_base_point(a, b, p)
 
-    # 30 bits => 182.19s find n
+    # 30 bits => 182.19s find n coreI7 16gb ram
     # p = 987095027
     # a = 1
     # b = 7
     # G = Point(112870365, 782359001, (a, b, p))
     # n = 141018209
+
+    # 30 bits => 228.84s find n coreI5 8gb ram
+    # p = 742671731
+    # a = 1
+    # b = 7
+    # G = Point(725374996, 523751066, (a, b, p))
+    # n = 82514657
 
     # 256 bits secp256k1
     # p = int("0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f", 16)

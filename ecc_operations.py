@@ -51,6 +51,8 @@ def find_n(G):
             last_print_time = current_time 
         P += G
         n += 1
+    if gmpy2.is_prime(n):
+        print(f"{n} is a prime")
     return n
 
 def generate_keys(G, n):
